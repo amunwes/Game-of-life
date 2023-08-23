@@ -43,9 +43,8 @@ if __name__ == '__main__':
     pygame.display.set_caption("My Game")
 
     grid = init_grid(10, 10)
-    swap_status = init_grid(10, 10) # 2nd grid to map whether a square has been swapped this click
+    swap_status = init_grid(10, 10)  # 2nd grid to map whether a square has been swapped this click
     mouse_down = False
-    # grid[1,2] = 1
 
     # Loop until the user clicks the close button.
     done = False
@@ -68,21 +67,14 @@ if __name__ == '__main__':
         # --- Game logic should go here
         if mouse_down:
             player_position = pygame.mouse.get_pos()
-            row = (player_position[1] - margin) // (width + margin)
-            col = (player_position[0] - margin) // (height + margin)
-            if (not swap_status[row, col]):
-                swap_status[row, col] = 1
-                grid = update_grid(row, col, grid)
-
-        # player_position = pygame.mouse.get_pos()
-        # row = int(player_position[0] / ((width + margin) + margin))
-        # col = int(player_position[1] / ((width + margin) + margin))
-        # print(f'X?: {row}, \n Y?: {col}')
+            if 0 < player_position[0] < size[0] and 0 < player_position[1] < size[1]:
+                row = (player_position[1] - margin) // (width + margin)
+                col = (player_position[0] - margin) // (height + margin)
+                if (not swap_status[row, col]):
+                    swap_status[row, col] = 1
+                    grid = update_grid(row, col, grid)
 
         # --- Screen-clearing code goes here
-
-        # Here, we clear the screen to white. Don't put other drawing commands
-        # above this, or they will be erased with this command.
 
         # If you want a background image, replace this clear with blit'ing the
         # background image.

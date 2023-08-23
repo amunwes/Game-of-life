@@ -59,8 +59,8 @@ def update_grid(r, c, cells):
 
     return cells
 
-
-def crawl(cells):
+# unused function for
+def crawl(cells): # unused
     for r, c in np.ndindex(cells.shape):
         if cells[r, c]:
             if (0 <= r + 1 < X_DIM):
@@ -132,7 +132,7 @@ if __name__ == '__main__':
         # --- Game logic should go here
         if mouse_down and not start:
             player_position = pygame.mouse.get_pos()
-            if player_position[0] < board[0] and player_position[1] < board[1]:
+            if 0 < player_position[0] < board[0] and 0 < player_position[1] < board[1]:
                 row = (player_position[1] - MARGIN) // (WIDTH + MARGIN)
                 col = (player_position[0] - MARGIN) // (HEIGHT + MARGIN)
                 if not swap_status[row, col]:
