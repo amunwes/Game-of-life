@@ -22,7 +22,7 @@ def init_grid(dimx, dimy):
     return cells
 
 
-def update_grid(r, c, cells):
+def update_cell(r, c, cells):
     # row = (r - margin) // (width + margin)
     # col = (c - margin) // (height + margin)
     if cells[r, c] == 1:
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     pygame.init()
 
     # Set the width and height of the screen [width, height]
-    size = (255, 255)
+    size = (10*width+11*margin, 10*height+11*margin)
     screen = pygame.display.set_mode(size)
 
     pygame.display.set_caption("My Game")
@@ -68,11 +68,11 @@ if __name__ == '__main__':
         if mouse_down:
             player_position = pygame.mouse.get_pos()
             if 0 < player_position[0] < size[0] and 0 < player_position[1] < size[1]:
-                row = (player_position[1] - margin) // (width + margin)
-                col = (player_position[0] - margin) // (height + margin)
-                if (not swap_status[row, col]):
+                row = (player_position[1] - margin) // (height + margin)
+                col = (player_position[0] - margin) // (width + margin)
+                if not swap_status[row, col]:
                     swap_status[row, col] = 1
-                    grid = update_grid(row, col, grid)
+                    grid = update_cell(row, col, grid)
 
         # --- Screen-clearing code goes here
 
@@ -83,12 +83,12 @@ if __name__ == '__main__':
         # --- Drawing code should go here
 
         for r, c in np.ndindex(grid.shape):
-            if (not grid[r, c]):
+            if not grid[r, c]:
                 pygame.draw.rect(screen, WHITE,
-                                 (c * (width + margin) + margin, r * (width + margin) + margin, width, height))
+                                 (c * (width + margin) + margin, r * (height + margin) + margin, width, height))
             else:
                 pygame.draw.rect(screen, GREEN,
-                                 (c * (width + margin) + margin, r * (width + margin) + margin, width, height))
+                                 (c * (width + margin) + margin, r * (height + margin) + margin, width, height))
 
         player_position = pygame.mouse.get_pos()
         pygame.draw.circle(screen, RED, (player_position[0], player_position[1]), 2)

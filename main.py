@@ -44,7 +44,6 @@ def update_life(surface, cur):
             col = col_alive
 
         col = col if cur[r, c] == 1 else col_background
-        # pygame.draw.rect(surface, col, (c * sz, r * sz, sz - 1, sz - 1))
         pygame.draw.rect(surface, col,
                          (c * (WIDTH + MARGIN) + MARGIN, r * (WIDTH + MARGIN) + MARGIN, WIDTH, HEIGHT))
 
